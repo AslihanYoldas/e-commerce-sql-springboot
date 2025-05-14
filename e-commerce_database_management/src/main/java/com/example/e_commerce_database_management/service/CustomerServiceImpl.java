@@ -16,19 +16,17 @@ import com.example.e_commerce_database_management.mapper.CustomerMapper;
 import com.example.e_commerce_database_management.repository.CustomerRepository;
 
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
 private  CustomerRepository customerRepository;
 private PasswordEncoder passwordEncoder;
 
-
-
+public CustomerServiceImpl(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
+    this.customerRepository = customerRepository;
+    this.passwordEncoder = passwordEncoder;
+}
 
 
 @Override
@@ -46,13 +44,27 @@ private Set<Customer> parseCsv(MultipartFile file) {
     try (
         Reader reader =  new InputStreamReader(file.getInputStream()))
      {
-         return CSVFormat.EXCEL.builder().
-         setHeader(CustomerHeaders.getHeaders())
-                .get()
-                .parse(reader)
-                .stream()
-                .map(CustomerMapper::mapToCustomer)
-                .collect(Collectors.toSet());
+         return CSVFormat.DEFAULT.builder()
+            .setHeader(CustomerHeaders.getHeaders())
+            .setSkipHeaderRecord(true)
+            .setIgnoreEmptyLines(true)
+            .setQuote('"')
+            .setDelimiter(',')
+            .setEscape('\\')
+            .setTrim(true)
+            .get()
+            .parse(reader)
+            .stream()
+            .filter(record -> {
+                boolean valid = record.size() >= CustomerHeaders.getHeaders().length;
+                if (!valid) {
+                    System.err.println("Skipping invalid record (too few columns): " + record);
+                }
+                return valid;
+            })
+            .map(CustomerMapper::mapToCustomer)
+           
+            .collect(Collectors.toSet());
                 
 
     } catch (Exception e) {
