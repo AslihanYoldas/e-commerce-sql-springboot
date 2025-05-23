@@ -37,15 +37,6 @@ public class CustomerMapper {
     }
 
     public static Customer mapToCustomer(CSVRecord record){
-        if (record.size() < 5) { // Assuming there are 5 expected columns
-            System.err.println("RECORD=" +record);
-             // Skip this record or handle it as needed
-        }
-        System.err.println(record.get("customer_name"));
-        System.err.println(record.get("customer_phone_number"));
-        System.err.println(record.get("customer_email"));
-        System.err.println(record.get("customer_password"));
-        
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy", Locale.ENGLISH); // Specify locale if needed
         LocalDate registrationDate;
