@@ -22,8 +22,10 @@ import com.example.e_commerce_database_management.exception.CsvParsingException;
 import com.example.e_commerce_database_management.mapper.CustomerMapper;
 import com.example.e_commerce_database_management.repository.CustomerRepository;
 
+import lombok.RequiredArgsConstructor;
 
 
+@RequiredArgsConstructor
 @Service
 public class CustomerServiceImpl implements CustomerService {
 private static final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
@@ -32,10 +34,6 @@ private static final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.cl
 private  CustomerRepository customerRepository;
 private PasswordEncoder passwordEncoder;
 
-public CustomerServiceImpl(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
-    this.customerRepository = customerRepository;
-    this.passwordEncoder = passwordEncoder;
-}
 
 
 @Override
@@ -134,6 +132,12 @@ private static Customer fixAndMapRecords(CSVRecord badRecord) {
         
             
     }
+
+
+@Override
+public List<Customer> getAllCustomers() {
+    return customerRepository.findAll();
+}
 
 
 
