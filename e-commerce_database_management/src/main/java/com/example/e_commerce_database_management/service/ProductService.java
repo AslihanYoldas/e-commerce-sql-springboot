@@ -8,7 +8,6 @@ import com.example.e_commerce_database_management.entity.Product;
 public interface ProductService {
 
     List<Product> importProducts();
-    List<String> importCategories();
 
     
 

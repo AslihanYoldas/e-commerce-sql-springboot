@@ -20,14 +20,14 @@ public class ProductApiClient {
     }
 
      public List<ProductDto> getProducts() {
-        String url = ConstantValues.fakeStoreApiUrl +"/products";
+        String url = ConstantValues.FAKE_STORE_API_URL +"/products";
         ProductDto[] productDtos = restTemplate.getForObject(url, ProductDto[].class);
         System.out.println(Arrays.asList(productDtos));
         return Arrays.asList(productDtos);
     }
 
     public List<String> getCategories(){
-        String url = ConstantValues.fakeStoreApiUrl +"/products/categories";
+        String url = ConstantValues.FAKE_STORE_API_URL +"/products/categories";
         ResponseEntity<String[]> response = restTemplate.getForEntity(url,
          String[].class);
          return Arrays.asList(response.getBody());

@@ -31,8 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
 private static final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
 
-private  CustomerRepository customerRepository;
-private PasswordEncoder passwordEncoder;
+private final CustomerRepository customerRepository;
+private final PasswordEncoder passwordEncoder;
 
 
 
