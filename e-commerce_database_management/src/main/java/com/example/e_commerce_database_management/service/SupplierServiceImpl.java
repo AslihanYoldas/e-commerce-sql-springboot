@@ -20,6 +20,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier getSupplierForCategory(String categoryName) {
+
         // Getting the list of supplier names for that products category
         List<String> suppliers = ConstantValues.CATEGORY_SUPPLIER_MAP.getOrDefault((categoryName),List.of("Generic Supplier"));
         
@@ -27,7 +28,7 @@ public class SupplierServiceImpl implements SupplierService {
         String supplierName = suppliers.get(new Random().nextInt(suppliers.size()));
 
         //find that supplier in DB or create if not exist and return it
-        return supplierRepository.findBySupplierName(supplierName).orElse(supplierRepository.save(new Supplier(null,supplierName)));
+        return supplierRepository.findBySupplierName(supplierName).orElseGet(()->supplierRepository.save(new Supplier(null,supplierName)));
 
         
     }

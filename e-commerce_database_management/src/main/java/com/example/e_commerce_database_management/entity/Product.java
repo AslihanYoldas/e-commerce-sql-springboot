@@ -39,7 +39,7 @@ public class Product {
     @Column(name = "product_price", nullable = false)
     private float price;
 
-    @Column(name = "product_desc")
+    @Column(name = "product_desc", length=1000)
     private String desc;
 
     @Column(name = "product_image")

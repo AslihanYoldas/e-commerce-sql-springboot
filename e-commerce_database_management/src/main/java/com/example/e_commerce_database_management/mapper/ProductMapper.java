@@ -22,7 +22,10 @@ public  class ProductMapper {
     }
 
     public static Product mapToProduct(ProductDto productDto,Category cat, Supplier supplier){
+        System.out.println(productDto.getTitle());
+        System.out.println(productDto.getDescription());
 
+        try{
         return new Product(
             null,
             supplier,
@@ -32,6 +35,10 @@ public  class ProductMapper {
             productDto.getDescription(),
             productDto.getImage()
         );
+        }catch (Exception e){
+            System.out.println("ERROR ------------------  " + e.getMessage());
+            return null;
+        }
     }
 
 }

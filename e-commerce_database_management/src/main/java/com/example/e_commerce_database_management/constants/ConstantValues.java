@@ -11,7 +11,7 @@ public class ConstantValues {
             "men's clothing", "Fashion",
             "women's clothing", "Fashion",
             "jewelery", "Accessories",
-            "electronics", null);
+            "electronics", "");
 
     final public static Map<String, List<String>> CATEGORY_SUPPLIER_MAP = Map.of(
             "Fashion", List.of("Fashion World", "Clothing Corp", "Urban Style Co."),
