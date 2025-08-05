@@ -9,12 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto {
-String title;	
-float price;
-String description;
-String category;
-String image;
-
+public abstract class ProductDto {
+private String title;	
+private float price;
+private String description;
+private String category;
+private String image;
 
 }
